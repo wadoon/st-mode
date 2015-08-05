@@ -1,0 +1,47 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Wed Aug  5 23:53:43 2015
+;; Desktop file format version 206
+;; Emacs version 24.4.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (21954 34279 89819 165000) (desktop . "206") "weigl@laptop" nil nil ((((font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 11") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (foreground-color . "#DCDCCC") (background-color . "#3F3F3F") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 9) (right-fringe . 9) (scroll-bar-foreground) (scroll-bar-background . "grey75") (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (fullscreen . maximized) (tool-bar-position . top) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (alpha) (horizontal-scroll-bars . t) (display-type . color) (background-mode . dark) (cursor-color . "#FFFFEF") (sticky) (environment) (internal-border . 0) (frameset--id . "F7D5-7626-665B-0F2C") (frameset--mini t . t) (height . 39) (width . 149) (modeline . t) (minibuffer . t) (unsplittable) (left . 0) (top . 27) (icon-name) (visibility . t) (display . ":0") (explicit-name)) ((min-height . 8) (min-width . 20) (min-height-ignore . 6) (min-width-ignore . 8) (min-height-safe . 2) (min-width-safe . 4) (min-pixel-height . 144) (min-pixel-width . 180) (min-pixel-height-ignore . 108) (min-pixel-width-ignore . 72) (min-pixel-height-safe . 36) (min-pixel-width-safe . 36)) hc (pixel-width . 1366) (pixel-height . 686) (total-width . 152) (total-height . 38) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 682) (pixel-height . 686) (total-width . 76) (total-height . 38) (normal-height . 1.0) (normal-width . 0.5) (buffer "st-mode.el" (selected) (hscroll . 0) (fringes 9 9 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 3192) (start . 2726))) (vc (last . t) (pixel-width . 684) (pixel-height . 686) (total-width . 76) (total-height . 38) (normal-height . 1.0) (normal-width . 0.5) (combination-limit) (leaf (pixel-width . 684) (pixel-height . 612) (total-width . 76) (total-height . 34) (normal-height . 0.892128279883382) (normal-width . 1.0) (buffer "first.st" (selected) (hscroll . 0) (fringes 9 9 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 56) (start . 1))) (leaf (last . t) (pixel-width . 684) (pixel-height . 74) (total-width . 76) (total-height . 4) (normal-height . 0.10787172011661808) (normal-width . 1.0) (buffer "*RE-Builder*" (selected) (hscroll . 0) (fringes 9 9 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 22) (start . 1))))))])
+(setq extended-command-history '("re-builder" "eldoc-mode" "ielm" "slime-re-evaluate-defvar" "st-mode" "buffer"))
+(setq file-name-history nil)
+(setq grep-history nil)
+(setq compile-history nil)
+(setq minibuffer-history '("save-excursion" "regexp-opt"))
+(setq query-replace-history nil)
+(setq read-expression-history nil)
+(setq regexp-history nil)
+(setq regexp-search-ring nil)
+(setq search-ring '("st-font-lock"))
+(setq shell-command-history nil)
+(setq tags-file-name nil)
+(setq register-alist nil)
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/weigl/tmp/st-mode/st-mode.el"
+  "st-mode.el"
+  'emacs-lisp-mode
+  '(subword-mode override-global-mode flycheck-mode hs-minor-mode company-mode drag-stuff-mode global-auto-revert-mode undo-tree-mode flx-ido-mode eldoc-mode fixmee-mode button-lock-mode yas-minor-mode icicle-mode)
+  3192
+  '(3552 nil)
+  nil
+  nil
+  '((indent-tabs-mode . t) (buffer-file-coding-system . prefer-utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/weigl/tmp/st-mode/tests/first.st"
+  "first.st"
+  'st-mode
+  '(subword-mode override-global-mode flycheck-mode company-mode drag-stuff-mode global-auto-revert-mode undo-tree-mode flx-ido-mode fixmee-mode button-lock-mode yas-minor-mode icicle-mode)
+  56
+  '(181 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
