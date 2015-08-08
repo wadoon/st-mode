@@ -19,7 +19,28 @@
 (add-to-list 'auto-mode-alist
              '("\\.st\\'" . st-mode))
 
-'("{*" "*}")
+
+(defun st-regex-endswith (seq)
+  (let ((words (regexp-opt seq 'words)))
+    (concat ".*" words "$")))
+
+(defun st-regex-startswith (seq)
+  (let ((words (regexp-opt seq 'words)))
+    (concat "[ \t]*" words ".*")))
+
+
+(defvar st-indent-regex+1
+  (concat
+   (st-regex-endswith  '("DO" "THEN" "ELSE"))
+   "\\|"
+   (st-regex-startswith
+    '("FUNCTION_BLOCK" "PROGRAM" "CONFIGURATION" "VAR"
+      "VAR_INPUT" "VAR_OUTPUT"))))
+
+
+(defvar st-indent-regex-1
+  "[ \t]*\\<\\(END_.*\\|ELSE\\)\\>[ \t]*")
+
 
 (defvar  st-keywords
   (list "ANY" "ANY_BIT" "ANY_DATE" "ANY_DERIVED" "VAR_OUTPUT"
@@ -46,6 +67,8 @@
         "VAR_EXTERNAL"     "VAR_GLOBAL"  "VAR_INPUT"     "VAR_IN_OUT"
         "VAR_TEMP"     "WHILE"     "WITH"))
 
+
+
 (defvar st-comment-regex
   "\\((\\*.*\\*)\\)"
   "regex for marking StructuredText comments")
@@ -69,51 +92,28 @@
    `(,(concat "\\<" (regexp-opt st-keywords) "\\>")
      . font-lock-builtin-face)))
 
-(defvar st-indent-words
-  '())
 
 (defun st-indent-line ()
   "."
   (interactive)
   (beginning-of-line)
-
-  (if (bobp)
-      (indent-line-to 0)
-    (let ((not-indented t)
-          cur-indent)
-      (if (looking-at "^[ \t]*END_")
-          (progn
-            (save-excursion
-              (forward-line -1)
-              (setq cur-indent
-                    (max 0
-                         (- (current-indentation)
-                            tab-width)))))
-        (save-excursion
-          (while not-indented
-            (forward-line -1)
-            (if (looking-at "^[ \t]*END_")
-                (progn
-                  (setq cur-indent (current-indentation))
-                  (setq not-indented nil))
-              (if (looking-at
-                   (concat "[ \t]*"
-                           (regexp-opt st-indent-words)))
-                  (progn
-                    (setq cur-indent
-                          (+ (current-indentation)
-                             tab-width))
-                    (setq not-indented nil))
-                (if (bobp)
-                    (setq not-indented nil)))))))
-      (if cur-indent
-          (indent-line-to cur-indent)
-        (indent-line-to 0)))))
-
-
-(defconst st-indent-words
-  (list "IF" "ELSE" "ELSEIF" "FUNCTION_BLOCK"
-        "PROGRAM" "CONFIGURATION" "VAR" "VAR_INPUT" "VAR_OUTPUT"))
+  (let ((not-indented t)
+	cur-indent)
+    (setq cur-indent
+	  (save-excursion
+	    (cond
+	     ;; Beginning of the buffer => no indentation
+	     ((bobp) 0)
+	     ;; current line is deindentation
+	     ((looking-at-p st-indent-regex-1)
+	      (forward-line -1) ;; do not understand this
+	      (- (current-indentation) tab-width))
+	     (t
+	      (forward-line -1)
+	      (if (looking-at-p st-indent-regex+1)
+		  (+ (current-indentation) tab-width)
+		(current-indentation))))))
+    (indent-line-to cur-indent)))
 
 (defvar st-mode-syntax-table
   (let ((table (make-syntax-table)))
@@ -122,6 +122,23 @@
     (modify-syntax-entry ?* ". 23" table)
     (modify-syntax-entry ?\n "> b" table)
     table))
+
+
+(defun st-insert-if (&optional condition then else)
+  (interactive)
+  (let ((condition (read-string "Condition:" condition))
+	(then (read-string "Then:" then))
+	(else (read-string "Else:" else)))
+    (insert "IF ")
+    (insert condition)
+    (insert "THEN\n")
+    (insert then)
+    (insert "\nELSE\n")
+    (insert else)
+    (insert "END_IF")))
+
+
+
 
 (define-derived-mode
   st-mode
