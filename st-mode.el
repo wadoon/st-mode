@@ -86,8 +86,8 @@
      . font-lock-constant-face)
    '("\\(TIME_OF_DAY\\|TOD\\)#[012][0-9]:[0-5][0-9]:[0-5][0-9]\\(\\.[0-9]\\{,3\\}\\)"
      . font-lock-constant-face)
-   '(".*#.*" . font-lock-constant-face)
-   '("[0-9]+\\(\\.[0-9]+\\)?" . font-lock-constant-face)
+   '(\\<".*#.*\\>" . font-lock-constant-face)
+   '("\\<[0-9]+\\(\\.[0-9]+\\)?\\>" . font-lock-constant-face)
    '("\\(TRUE\\|FALSE\\)" . font-lock-constant-face)
    `(,(concat "\\<" (regexp-opt st-keywords) "\\>")
      . font-lock-builtin-face)))
@@ -115,14 +115,18 @@
 		(current-indentation))))))
     (indent-line-to cur-indent)))
 
-(defvar st-mode-syntax-table
-  (let ((table (make-syntax-table)))
-    (modify-syntax-entry ?_ "w" table)
-    (modify-syntax-entry ?/ ". 124b" table)
-    (modify-syntax-entry ?* ". 23" table)
-    (modify-syntax-entry ?\n "> b" table)
-    table))
+(defvar st-mode-syntax-table nil
+  "")
 
+(setq st-mode-syntax-table
+      (let ((table (make-syntax-table)))
+	(modify-syntax-entry ?_ "w" table)
+	(modify-syntax-entry ?/ ". 12b" table)
+	(modify-syntax-entry 40 ". 1n" table) ;; (
+	(modify-syntax-entry 41 ". 4n" table)
+	(modify-syntax-entry ?* ". 23n" table)
+	(modify-syntax-entry ?\n "> b" table)
+	table))
 
 (defun st-insert-if (&optional condition then else)
   (interactive)
