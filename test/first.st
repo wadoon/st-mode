@@ -1,3 +1,19 @@
+(*
+        I am an comment.
+*)
+
+TIME#2ms
+BIT#1
+INT#16#F
+
+"fdsafdsafdsafsdaf "
+'fdsafsafdsaf'
+BIT#1
+TRUE
+FALSE
+false
+program abc
+
 IF
 a
 THEN
@@ -21,3 +37,5 @@ IF a!=2 THEN
 ELSE
         ab:=6
 END_IF
+
+END_PROGRAM
